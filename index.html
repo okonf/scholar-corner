@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Idowu Scholar Corner | Premium Educational Hub</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&family=Pacifico&display=swap" rel="stylesheet">
+    
+    <style>
+        :root { 
+            --navy: #0b2a4a; 
+            --wine: #6a1f2b; 
+            --yellow: #F4C430; 
+            --dark-overlay: rgba(5, 22, 38, 0.85);
+            --white: #ffffff;
+            --transition: all 0.8s cubic-bezier(0.2, 1, 0.3, 1);
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Montserrat', sans-serif; color: var(--white); line-height: 1.6; overflow-x: hidden; background-color: #051626; }
+
+        /* GLOBAL BACKGROUND SLIDER */
+        #bg-slider {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2;
+            background-size: cover; background-position: center;
+            transition: background-image 2s ease-in-out;
+        }
+        .bg-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
+            background: linear-gradient(to bottom, var(--dark-overlay), rgba(11, 42, 74, 0.95));
+        }
+
+        /* HEADER */
+        header { 
+            background: var(--navy); border-bottom: 4px solid var(--yellow); 
+            padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; 
+            position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+        }
+        .logo-area { display: flex; align-items: center; gap: 12px; }
+        .logo-img { width: 50px; height: 50px; border-radius: 50%; border: 2px solid var(--yellow); object-fit: cover; }
+        .logo-text { font-family: 'Pacifico', cursive; font-size: 1.6rem; color: var(--yellow); }
+        
+        .nav-links { display: flex; gap: 10px; }
+        .nav-links button { background: none; border: none; padding: 10px 15px; font-weight: 700; cursor: pointer; color: var(--white); text-transform: uppercase; font-size: 0.85rem; letter-spacing: 1px; }
+        .nav-links button.active, .nav-links button:hover { color: var(--yellow); border-bottom: 2px solid var(--yellow); }
+
+        /* REVEAL SYSTEM */
+        .reveal { opacity: 0; transform: translateY(30px); transition: var(--transition); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+        .section-title { font-size: 2.5rem; margin-bottom: 30px; color: var(--yellow); border-left: 10px solid var(--wine); padding-left: 20px; text-transform: uppercase; font-weight: 800; }
+
+        /* HERO SECTION */
+        .hero-section { height: 85vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 20px; }
+        .hero-badge { background: var(--wine); color: var(--yellow); padding: 8px 20px; border-radius: 50px; font-weight: 700; font-size: 0.9rem; margin-bottom: 20px; border: 1px solid var(--yellow); }
+
+        /* CARDS */
+        .catalog-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 30px; margin-top: 20px; }
+        .card { background: rgba(11, 42, 74, 0.6); backdrop-filter: blur(15px); border-radius: 25px; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); margin-bottom: 30px; transition: 0.4s; }
+        .card:hover { transform: translateY(-10px); border-color: var(--yellow); box-shadow: 0 15px 40px rgba(0,0,0,0.4); }
+        .card-img { height: 230px; background-size: cover; background-position: center; border-bottom: 5px solid var(--wine); background-color: #111; }
+        .card-body { padding: 35px; }
+        .card-body h3 { color: var(--yellow); margin-bottom: 15px; font-size: 1.6rem; }
+
+        /* BUTTONS */
+        .btn-main { background: var(--yellow); color: var(--navy); padding: 18px 40px; border-radius: 12px; font-weight: 800; border: none; cursor: pointer; text-transform: uppercase; transition: 0.3s; display: inline-block; font-size: 1rem; text-decoration: none; text-align: center;}
+        .btn-main:hover { background: white; transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0,0,0,0.3); }
+
+        /* MISSION CARDS */
+        .mission-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; margin-top: 40px; }
+        .mission-card { background: rgba(106, 31, 43, 0.3); padding: 40px; border-radius: 20px; border: 1px solid rgba(244, 196, 48, 0.2); }
+        .mission-card h4 { color: var(--yellow); font-size: 1.4rem; margin-bottom: 15px; }
+
+        .form-control { width: 100%; padding: 18px; background: rgba(255,255,255,0.05); border: 2px solid var(--yellow); color: white; border-radius: 10px; margin-bottom: 20px; font-size: 1rem; outline: none; }
+
+        .whatsapp-btn { position: fixed; bottom: 30px; right: 30px; background: #25d366; width: 65px; height: 65px; border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 2000; border: 2px solid white; box-shadow: 0 10px 20px rgba(0,0,0,0.5); transition: 0.3s; }
+        .whatsapp-btn:hover { transform: scale(1.1); }
+
+        @media (max-width: 800px) {
+            .nav-links { display: none; }
+            header { justify-content: center; }
+            .hero-section h1 { font-size: 2.5rem; }
+            .catalog-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="bg-slider"></div>
+    <div class="bg-overlay"></div>
+
+    <header>
+        <div class="logo-area">
+            <img src="logo.png" alt="Logo" class="logo-img">
+            <div class="logo-text">Scholar Corner</div>
+        </div>
+        <nav class="nav-links">
+            <button onclick="showPage('home')" class="active">Home</button>
+            <button onclick="showPage('about')">Mission</button>
+            <button onclick="showPage('services')">Programs</button>
+            <button onclick="showPage('register')">Enroll</button>
+        </nav>
+    </header>
+
+    <div id="home" class="page">
+        <section class="hero-section">
+            <div class="hero-badge reveal">ESTABLISHED FOR EXCELLENCE</div>
+            <h1 class="reveal" style="font-size: clamp(2.5rem, 8vw, 4.5rem); font-weight: 800; color: var(--yellow); line-height: 1.1;">Building the Next<br>Generation of Leaders</h1>
+            <p class="reveal" style="font-size: 1.4rem; max-width: 850px; margin-top: 25px; opacity: 0.9;">Premium home-based mentorship designed to unlock academic brilliance and creative mastery in every student.</p>
+            <div class="reveal" style="margin-top: 45px; display: flex; gap: 20px; flex-wrap: wrap; justify-content: center;">
+                <button class="btn-main" onclick="showPage('services')">View Programs</button>
+                <button class="btn-main" style="background: transparent; border: 2px solid white; color: white;" onclick="showPage('register')">Book Assessment</button>
+            </div>
+        </section>
+        
+        <div style="max-width: 1200px; margin: -50px auto 100px; padding: 0 20px;">
+            <div class="card reveal" style="border-bottom: 8px solid var(--yellow); background: rgba(11, 42, 74, 0.9);">
+                <div class="card-body" style="text-align: center; padding: 60px 40px;">
+                    <h2 style="font-size: 2.2rem; color: var(--yellow); margin-bottom: 20px;">Personalized Success</h2>
+                    <p style="font-size: 1.25rem; opacity: 0.9;">In a world of crowded classrooms, we provide the silence and custom focus required for deep learning. We don't just teach—we ensure your child leads.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="about" class="page" style="display:none; padding: 80px 5%;">
+        <div style="max-width: 1150px; margin: auto;">
+            <div class="card reveal">
+                <div style="display: flex; flex-wrap: wrap; gap: 50px; padding: 50px; align-items: center;">
+                    <img src="tutor.jpg" alt="Mustapha Idowu" style="width: 100%; max-width: 380px; border-radius: 30px; border: 10px solid var(--yellow); transform: rotate(-2deg); box-shadow: 10px 10px 30px rgba(0,0,0,0.5);">
+                    <div style="flex: 1; min-width: 320px;">
+                        <h2 class="section-title">The Scholar Mission</h2>
+                        <h3 style="color: var(--yellow); font-size: 1.8rem; margin-bottom: 25px;">Excellence is Our Standard</h3>
+                        <p style="font-size: 1.2rem; margin-bottom: 20px; line-height: 1.8;">Our mission is simple: <strong>Every child is a scholar.</strong> We are dedicated to ensuring children attain the highest possible level of academic competence through personalized, elite instruction.</p>
+                        <p style="font-size: 1.2rem; line-height: 1.8;">By merging rigorous curriculum success with future-proof tech skills, we produce well-rounded individuals ready for the global stage.</p>
+                    </div>
+                </div>
+            </div>
+
+            <h2 class="section-title reveal" style="margin-top: 80px; text-align: center; border: none;">Our 3 Pillars of Growth</h2>
+            <div class="mission-grid">
+                <div class="mission-card reveal">
+                    <h4>1. Academic Brilliance</h4>
+                    <p>Total curriculum comprehension. Our goal is class dominance and exam excellence in WAEC, JAMB, and beyond.</p>
+                </div>
+                <div class="mission-card reveal">
+                    <h4>2. Digital Literacy</h4>
+                    <p>Python coding and Web Engineering are integrated to ensure scholars are creators, not just consumers, of technology.</p>
+                </div>
+                <div class="mission-card reveal">
+                    <h4>3. Creative Discipline</h4>
+                    <p>Piano and Arts build the patience, discipline, and cognitive confidence that translates directly into high school grades.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="services" class="page" style="display:none; padding: 80px 5%;">
+        <div style="max-width: 1300px; margin: auto;">
+            <h2 class="section-title reveal">Full Program Catalog</h2>
+            <div class="catalog-grid">
+                <div class="card reveal">
+                    <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1434030216411-0b793f4b4173?q=80&w=600');"></div>
+                    <div class="card-body"><h3>General Academics</h3><p>Complete JSS/SSS support for A-grade success and exam readiness.</p><button class="btn-main" onclick="showPage('register')" style="width:100%; margin-top:15px; padding:12px;">Enroll Now</button></div>
+                </div>
+                <div class="card reveal">
+                    <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1515879218367-8466d910aaa4?q=80&w=600');"></div>
+                    <div class="card-body"><h3>Python Coding</h3><p>Master logic and software building with the world's #1 language.</p><button class="btn-main" onclick="showPage('register')" style="width:100%; margin-top:15px; padding:12px;">Enroll Now</button></div>
+                </div>
+                <div class="card reveal">
+                    <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1520529986993-35c8247a0cbf?q=80&w=600');"></div>
+                    <div class="card-body"><h3>Piano & Theory</h3><p>Classical training to foster cognitive development and focus.</p><button class="btn-main" onclick="showPage('register')" style="width:100%; margin-top:15px; padding:12px;">Enroll Now</button></div>
+                </div>
+                <div class="card reveal">
+                    <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1547658719-da2b51169166?q=80&w=600');"></div>
+                    <div class="card-body"><h3>Web Engineering</h3><p>Build real websites with HTML, CSS, and modern design tools.</p><button class="btn-main" onclick="showPage('register')" style="width:100%; margin-top:15px; padding:12px;">Enroll Now</button></div>
+                </div>
+                <div class="card reveal">
+                    <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1519315901367-f34ff9154487?q=80&w=600');"></div>
+                    <div class="card-body"><h3>Swimming Skills</h3><p>Professional water safety and swimming mastery for all ages.</p><button class="btn-main" onclick="showPage('register')" style="width:100%; margin-top:15px; padding:12px;">Enroll Now</button></div>
+                </div>
+                <div class="card reveal">
+                    <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?q=80&w=600');"></div>
+                    <div class="card-body"><h3>Creative Arts</h3><p>Dance, choreography, and visual expression for confidence.</p><button class="btn-main" onclick="showPage('register')" style="width:100%; margin-top:15px; padding:12px;">Enroll Now</button></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="register" class="page" style="display:none; padding: 80px 5%;">
+        <div class="reveal" style="max-width: 600px; margin: auto; background: rgba(11, 42, 74, 0.98); padding: 50px; border-radius: 30px; border: 2px solid var(--yellow); box-shadow: 0 20px 50px rgba(0,0,0,0.5);">
+            <h2 style="text-align: center; color: var(--yellow); margin-bottom: 30px; font-size: 2rem;">Start the Journey</h2>
+            <form name="enrollment" method="POST" data-netlify="true">
+                <input type="hidden" name="form-name" value="enrollment">
+                <input type="text" name="parent" placeholder="Parent Full Name" class="form-control" required>
+                <input type="tel" name="phone" placeholder="WhatsApp Number" class="form-control" required>
+                <select name="program" class="form-control">
+                    <option>Academic Tutoring</option>
+                    <option>Python / Web Academy</option>
+                    <option>Music / Piano</option>
+                    <option>Swimming / Arts</option>
+                </select>
+                <button type="submit" class="btn-main" style="width:100%">Submit Enrollment Request</button>
+            </form>
+        </div>
+    </div>
+
+    <a href="https://wa.me/2348060349885" class="whatsapp-btn" target="_blank">
+        <svg width="35" height="35" fill="white" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.588-5.946 0-6.556 5.332-11.888 11.888-11.888 3.176 0 6.161 1.237 8.404 3.48s3.48 5.228 3.48 8.404c0 6.556-5.332 11.888-11.888 11.888-2.013 0-3.987-.513-5.736-1.488l-6.247 1.641zm6.204-4.048l.35.207c1.472.873 3.17 1.334 4.903 1.334 5.174 0 9.385-4.211 9.385-9.385 0-2.507-1.03-4.864-2.812-6.646-1.782-1.782-4.139-2.811-6.646-2.811-5.174 0-9.385 4.211-9.385 9.385 0 1.792.51 3.541 1.474 5.061l.228.358-1.01 3.688 3.785-1.004z"/></svg>
+    </a>
+
+    <script>
+        const bgImages = [
+            'https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=1600',
+            'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=1600',
+            'https://images.unsplash.com/photo-1509062522246-3755977927d7?q=80&w=1600'
+        ];
+        let bgIdx = 0;
+        function changeBg() {
+            document.getElementById('bg-slider').style.backgroundImage = `url('${bgImages[bgIdx]}')`;
+            bgIdx = (bgIdx + 1) % bgImages.length;
+        }
+        setInterval(changeBg, 5000);
+        changeBg();
+
+        function rev() {
+            document.querySelectorAll(".reveal").forEach(r => {
+                if (r.getBoundingClientRect().top < window.innerHeight - 50) r.classList.add("active");
+            });
+        }
+        window.addEventListener("scroll", rev);
+        window.onload = rev;
+
+        function showPage(id) {
+            document.querySelectorAll('.page').forEach(p => p.style.display = 'none');
+            document.getElementById(id).style.display = 'block';
+            document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+            const btn = Array.from(document.querySelectorAll('nav button')).find(b => b.innerText.toLowerCase().includes(id.substring(0,3)));
+            if(btn) btn.classList.add('active');
+            window.scrollTo(0,0);
+            setTimeout(rev, 100);
+        }
+    </script>
+</body>
+</html>
